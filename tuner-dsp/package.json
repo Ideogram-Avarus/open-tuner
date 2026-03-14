@@ -1,0 +1,34 @@
+{
+  "name": "tuner-dsp",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "react-native": {
+    "android": {
+      "sourceDir": "./android",
+      "cmakeListsPath": "./CMakeLists.txt",
+      "packageImportPath": "import com.tunerdsp.TunerDspModulePackage;",
+      "packageInstance": "new TunerDspModulePackage()"
+    }
+  },
+  "scripts": {
+    "commit": "git add . && git commit -m \"test\" && git push"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*"
+  },
+  "devDependencies": {
+    "@react-native-community/cli": "latest",
+    "@types/react": "~19.1.0",
+    "typescript": "~5.9.2"
+  },
+  "codegenConfig": {
+    "name": "TunerDspSpecs",
+    "type": "modules",
+    "jsSrcsDir": "specs",
+    "android": {
+      "javaPackageName": "com.tunerdsp"
+    },
+    "ios": {}
+  }
+}
