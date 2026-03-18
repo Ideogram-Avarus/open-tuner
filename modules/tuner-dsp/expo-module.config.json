@@ -1,0 +1,9 @@
+{
+  "platforms": ["apple", "android", "web"],
+  "apple": {
+    "modules": ["TunerDspModule"]
+  },
+  "android": {
+    "modules": ["expo.modules.tunerdsp.TunerDspModule"]
+  }
+}

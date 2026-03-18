@@ -27,7 +27,7 @@ apply plugin: "com.android.library"
 apply plugin: "com.facebook.react"
 
 android {
-  namespace "com.tunerdsp"
+  namespace "expo.modules.tunerdsp"
   compileSdkVersion safeExtGet('compileSdkVersion', 34)
 
   defaultConfig {

@@ -1,7 +1,7 @@
-import { useTunerResults } from "./tuner/useTunerResults";
-import { TunerProcessor } from "./tuner/TunerProcessor";
 import { usePermissions } from "./audio";
 import { DEFAULT_CONFIG } from "./configs";
+import { TunerProcessor } from "./tuner/TunerProcessor";
+import { useTunerResults } from "./tuner/useTunerResults";
 import type { TunerEngineConfig } from "./types";
 
 export const useTuner = (
