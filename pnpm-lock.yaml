@@ -92,9 +92,6 @@ importers:
       react-native-worklets:
         specifier: 0.5.1
         version: 0.5.1(@babel/core@7.29.0)(react-native@0.81.5(@babel/core@7.29.0)(@react-native-community/cli@20.1.2(typescript@5.9.3))(@types/react@19.1.17)(react@19.1.0))(react@19.1.0)
-      tuner-dsp:
-        specifier: workspace:*
-        version: link:tuner-dsp
     devDependencies:
       '@react-native-community/cli':
         specifier: latest

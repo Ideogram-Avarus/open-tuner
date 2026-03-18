@@ -1,6 +1,5 @@
+import { requireNativeModule } from 'expo-modules-core';
 import type { TurboModule } from 'react-native';
-import { TurboModuleRegistry } from 'react-native';
-
 
 export type TunerConfigSpecs = {
 
@@ -33,7 +32,6 @@ export interface Spec extends TurboModule {
   destroy(): void;
 }
 
-
-const NativeTuner = TurboModuleRegistry.getEnforcing<Spec>('TunerDsp');
+const NativeTuner = requireNativeModule<Spec>("TunerDsp")
 
 export default NativeTuner;

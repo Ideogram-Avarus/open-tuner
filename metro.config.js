@@ -6,7 +6,7 @@ const workspaceRoot = projectRoot;
 
 const config = getDefaultConfig(projectRoot);
 
-config.watchFolders = [path.resolve(workspaceRoot, "tuner-dsp")];
+config.watchFolders = [path.resolve(workspaceRoot, "packages", "tuner-dsp")];
 
 // Prevent Metro from looking past the app root for node_modules
 config.resolver.nodeModulesPaths = [

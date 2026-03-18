@@ -4,6 +4,6 @@
     "modules": ["TunerDspModule"]
   },
   "android": {
-    "modules": ["expo.modules.tunerdsp.TunerDspModule"]
+    "modules": ["com.tunerdsp.TunerDspModule"]
   }
 }
