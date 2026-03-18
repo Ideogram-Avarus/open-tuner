@@ -9,7 +9,7 @@ import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableArray;
 
 
-public class TunerDspModule extends Module implements ModuleDefinition {
+public class TunerDspModule extends NativeTunerDspSpec {
 
     public static final String NAME = "TunerDsp";
 

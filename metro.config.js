@@ -1,18 +1,13 @@
-const path = require("path");
-const { getDefaultConfig } = require("expo/metro-config");
+const path = require('path');
 
-const projectRoot = __dirname;
-const workspaceRoot = projectRoot;
-
-const config = getDefaultConfig(projectRoot);
-
-config.watchFolders = [path.resolve(workspaceRoot, "packages", "tuner-dsp")];
-
-// Prevent Metro from looking past the app root for node_modules
-config.resolver.nodeModulesPaths = [
-  path.resolve(projectRoot, "node_modules"),
-];
-
-config.resolver.disableHierarchicalLookup = true;
-
-module.exports = config;
+module.exports = {
+  resolver: {
+    extraNodeModules: {
+      react: path.resolve(__dirname, 'node_modules/react'),
+      'react-native': path.resolve(__dirname, 'node_modules/react-native'),
+    },
+  },
+  watchFolders: [
+    path.resolve(__dirname, 'tuner-dsp'),
+  ],
+};
