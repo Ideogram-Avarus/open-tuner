@@ -42,7 +42,7 @@
     "react-native-svg": "15.12.1",
     "react-native-web": "~0.21.0",
     "react-native-worklets": "0.5.1",
-    "tuner-dsp": "workspace:*"
+    "tuner-dsp": "github:Ideogram-Avarus/tuner-dsp"
   },
   "devDependencies": {
     "@react-native-community/cli": "latest",
