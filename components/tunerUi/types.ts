@@ -1,5 +1,6 @@
 import type { TunerResult } from "tuner-dsp";
 
+export type HaloState = 'inactive' |'far' | 'near' | 'inTune';
 
 export interface TuningGlow {
     color: string;
@@ -7,8 +8,6 @@ export interface TuningGlow {
     radius: number;
     strong: boolean;
 }
-
-
 
 export interface TunerDisplay {
   noteInfo: NoteInfo
@@ -20,6 +19,7 @@ export interface TunerDisplay {
   confidence: number
   color: string
   glow: TuningGlow;
+  haloState: HaloState
 }
 
 export interface NoteInfo {

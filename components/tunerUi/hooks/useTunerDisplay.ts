@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { TunerDisplay, TunerResult } from '../types';
-import { getTuningColor, getTuningGlow, midiToNoteInfo } from '../utils';
+import { getHaloState, getTuningColor, getTuningGlow, midiToNoteInfo } from '../utils';
 
 const defaultDisplay: TunerDisplay = {
     noteInfo: {
@@ -16,6 +16,7 @@ const defaultDisplay: TunerDisplay = {
     confidence: 0,
     color: '#7f8c8d',
     glow: { color: '#7f8c8d', opacity: 0.15, radius: 8, strong: false },
+    haloState: 'inactive',
 }
 
 export const useTunerDisplay = (result: TunerResult | null): TunerDisplay => {
@@ -24,7 +25,7 @@ export const useTunerDisplay = (result: TunerResult | null): TunerDisplay => {
     const noteInfo = midiToNoteInfo(result.midiNote);
     const color = getTuningColor(result.cents, result.hasPitch);
     const glow = getTuningGlow(result.cents, result.hasPitch);
-
+    const haloState = getHaloState(result.cents, result.hasPitch);
     return {
       noteInfo,
       octave: noteInfo.octave,
@@ -34,7 +35,8 @@ export const useTunerDisplay = (result: TunerResult | null): TunerDisplay => {
       amplitude: result.amplitude,
       confidence: result.confidence,
       color,
-      glow
+      glow,
+      haloState
     };
   }, [result]);
 };

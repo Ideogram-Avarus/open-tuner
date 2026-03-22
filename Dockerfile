@@ -5,6 +5,7 @@ ENV PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$ANDROID_SDK_ROOT/plat
 
 # Dependencies
 RUN apt-get update && apt-get install -y \
+    adb \
     openjdk-17-jdk \
     unzip \
     wget \
@@ -27,9 +28,15 @@ RUN sdkmanager "platform-tools" "platforms;android-34" "build-tools;34.0.0"
 
 WORKDIR /app
 
-# Clone git repository
-RUN git clone https://github.com/Ideogram-Avarus/open-tuner.git . 
+
+COPY package.json app.json eas.json eslint.config.js tsconfig.json metro.config.js ./
+COPY app assets components constants hooks ./
+COPY tuner-dsp ./tuner-dsp
+
 
 RUN npm install
 
+RUN npm install -g eas-cli
+
 CMD ["npx", "expo", "prebuild"]
+

@@ -15,10 +15,10 @@ interface Props {
 
 export const GaugeNeedle: React.FC<Props> = ({ size, color, cents }) => {
   const radius = size * 0.47;
+  const text_height = 80 + 24
   const cx = size / 2;
   const cy = radius + 35;
   const needleLength = radius * 0.88;
-
   const rotation = useNeedle(cents);
 
   const animatedProps = useAnimatedProps(() => ({
@@ -40,19 +40,6 @@ export const GaugeNeedle: React.FC<Props> = ({ size, color, cents }) => {
     >
       <AnimatedG animatedProps={animatedProps}>
         <NeedleSVG cx={cx} cy={cy} needleLength={needleLength} color={color} />
-        { 
-        // In tune halo
-        Math.abs(cents) < 3 && (
-          <Circle
-            cx={cx}
-            cy={cy - needleLength}
-            r={11}
-            fill="none"
-            stroke={color}
-            strokeWidth={2}
-            opacity={0.4}
-          />
-        )}
       </AnimatedG>
 
       {/* Fixed pivot cap */}

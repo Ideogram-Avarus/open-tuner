@@ -7,6 +7,7 @@ import math
 
 OUT_DIR = Path('assets/images')
 BASE = 1024
+ICON_SCALE = 0.82  # overall icon size inside the square (1.0 = full bleed)
 
 
 def make_gradient(size, top=(25, 160, 255), bottom=(0, 255, 200)):
@@ -163,14 +164,39 @@ def draw_fork_and_waves(size):
     grad.putalpha(mask)
     return grad
 
+def center_scale_rgba(art, size, scale, bg_rgba=None):
+    w, h = size
+    canvas = Image.new('RGBA', (w, h), bg_rgba or (0, 0, 0, 0))
+    target = int(min(w, h) * scale)
+    art_scaled = art.resize((target, target), resample=Image.LANCZOS)
+    x = (w - target) // 2
+    y = (h - target) // 2
+    canvas.alpha_composite(art_scaled, (x, y))
+    return canvas
 
+def center_scale_mask(art, size, scale):
+    w, h = size
+    mask = Image.new('L', (w, h), 0)
+    target = int(min(w, h) * scale)
+    art_mask = art.split()[-1].resize((target, target), resample=Image.LANCZOS)
+    x = (w - target) // 2
+    y = (h - target) // 2
+    mask.paste(art_mask, (x, y))
+    return mask
 
+def make_full(size, art_small, background = (5,5,5,255)):
+    w, h = size
+    bg = Image.new('RGBA', (w, h), background)
+    scale = int(min(w, h) * 0.85)
+    art_scaled = art_small.resize((scale, scale), resample=Image.LANCZOS)
+    x = (w - scale) // 2
+    y = (h - scale) // 2
+    bg.alpha_composite(art_scaled, (x, y))
+    return bg
 
 def main():
     art = draw_fork_and_waves((BASE, BASE))
-    black_bg = Image.new('RGBA', (BASE, BASE), (5, 5, 5, 255))
-    icon_full = black_bg.copy()
-    icon_full.alpha_composite(art)
+    icon_full = center_scale_rgba(art, (BASE, BASE), ICON_SCALE, (5, 5, 5, 255))
 
     icon_full.save(OUT_DIR / 'icon.png')
     icon_full.save(OUT_DIR / 'splash-icon.png')
@@ -178,32 +204,17 @@ def main():
     bg = Image.new('RGBA', (512, 512), (5, 5, 5, 255))
     bg.save(OUT_DIR / 'android-icon-background.png')
 
-    fg = art.resize((512, 512), resample=Image.LANCZOS)
+    fg = center_scale_rgba(art, (512, 512), ICON_SCALE)
     fg.save(OUT_DIR / 'android-icon-foreground.png')
 
-    mask_mono = draw_fork_and_waves((432, 432)).split()[-1]
+    mask_mono = center_scale_mask(art, (432, 432), ICON_SCALE)
     white = Image.new('RGBA', (432, 432), (255, 255, 255, 255))
     mono = Image.composite(white, Image.new('RGBA', (432, 432), (0, 0, 0, 0)), mask_mono)
     mono.save(OUT_DIR / 'android-icon-monochrome.png')
 
     fav = icon_full.resize((48, 48), resample=Image.LANCZOS)
     fav.save(OUT_DIR / 'favicon.png')
-
-    # Replace react logos with the new icon art on black background
-    art_small = Image.open(OUT_DIR / 'android-icon-foreground.png')
-
-    black = (5, 5, 5, 255)
-
-    def make_full(size):
-        w, h = size
-        bg = Image.new('RGBA', (w, h), black)
-        scale = int(min(w, h) * 0.85)
-        art_scaled = art_small.resize((scale, scale), resample=Image.LANCZOS)
-        x = (w - scale) // 2
-        y = (h - scale) // 2
-        bg.alpha_composite(art_scaled, (x, y))
-        return bg
-
+    
     sizes = {
         'react-logo.png': (100, 100),
         'react-logo@2x.png': (200, 200),
@@ -211,8 +222,10 @@ def main():
         'partial-react-logo.png': (518, 316),
     }
 
+    art_small = Image.open(OUT_DIR / 'android-icon-foreground.png')
+
     for name, size in sizes.items():
-        img = make_full(size)
+        img = make_full(size, art_small)
         img.save(OUT_DIR / name)
 
     print('done')

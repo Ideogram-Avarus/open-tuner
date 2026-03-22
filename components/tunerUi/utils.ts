@@ -1,5 +1,5 @@
 import { colors } from "@/hooks/theme";
-import { NoteInfo, TuningGlow } from "./types";
+import { HaloState, NoteInfo, TuningGlow } from "./types";
 
 const NOTE_NAMES = [
   "C","C#",
@@ -18,6 +18,18 @@ export const midiToNoteInfo = (midiNote: number): NoteInfo => {
   const name = NOTE_NAMES[noteIndex];
   return { name, octave, fullName: `${name}${octave}` };
 };
+
+export const getHaloState = (
+  cents: number,
+  hasPitch: boolean
+): HaloState => {
+  if (!hasPitch) return 'inactive'
+  const abs = Math.abs(cents)
+  if (abs < 5) return 'inTune'
+  if (abs < 15) return 'near'
+  if (abs < 30) return 'far'
+  return 'inactive'
+}
 
 
 export const getTuningColor = (

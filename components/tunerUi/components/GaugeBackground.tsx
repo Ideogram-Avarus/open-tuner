@@ -5,15 +5,23 @@ import { centsToDegrees, describeArc, polarToCartesian } from '../utils';
 
 interface Props {
   size: number;
-  color: string;
+  radius: number;
+  arcRadius: number;
+  box_size: number;
+  cy: number;
+  cx: number;
+  arc_stroke_width: number
 }
 
-export const GaugeBackground: React.FC<Props> = ({ size, color }) => {
-
-  const radius = size * 0.47;
-  const cx = size / 2;
-  const cy = radius + 35;
-  const arcRadius = radius - 10;
+export const GaugeBackground: React.FC<Props> = ({ 
+  size,
+  radius,
+  arcRadius,
+  box_size,
+  cy,
+  cx,
+  arc_stroke_width
+}) => {
 
   const arcPath = describeArc(cx, cy, arcRadius, -80, 80);
 
@@ -43,9 +51,9 @@ export const GaugeBackground: React.FC<Props> = ({ size, color }) => {
   };
 
   return (
-    <Svg width={size} height={radius + 70} viewBox={`0 0 ${size} ${radius + 70}`}>
+    <Svg width={size} height={box_size} viewBox={`0 0 ${size} ${box_size}`}>
       {/* Thick background arc */}
-      <Path d={arcPath} fill="none" stroke={colors.border} strokeWidth="11" strokeLinecap="round" />
+      <Path d={arcPath} fill="none" stroke={colors.border} strokeWidth={arc_stroke_width} strokeLinecap="round" />
       {majorCents.map((c) => renderTick(c, 28, 4.5, true))}
 
       {/* Minor ticks */}
