@@ -1,7 +1,5 @@
 import { useEffect } from 'react'
-import { useTuner } from 'tuner-dsp'
-
-
+import { DEFAULT_CONFIG, useTuner } from 'tuner-dsp'
 
 export const useTunerResult = () => {
     const { 
@@ -10,7 +8,10 @@ export const useTunerResult = () => {
         stop, 
         result,
         hasPermission 
-    } = useTuner()
+    } = useTuner({
+        ...DEFAULT_CONFIG,
+        hookUpdateSpeed: 100
+    })
 
     useEffect(() => {
         if (!hasPermission) return

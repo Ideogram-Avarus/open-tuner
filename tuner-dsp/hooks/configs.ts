@@ -20,5 +20,5 @@ export const NATIVE_TUNER_CONFIG: TunerConfigSpecs = {
 export const DEFAULT_CONFIG: TunerEngineConfig = {
   engineConfig: NATIVE_TUNER_CONFIG,
   startAtPermission: true,
-  hookUpdateSpeed: 750
+  hookUpdateSpeed: 300
 }

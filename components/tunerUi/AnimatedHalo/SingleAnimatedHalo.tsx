@@ -1,8 +1,8 @@
 import React from "react";
 import Animated from "react-native-reanimated";
 import { Circle, Defs, RadialGradient, Stop } from "react-native-svg";
-import { useHaloAnimation } from "../../hooks/useHaloAnimation";
-import { HaloState } from "../../types";
+import { HaloState } from "../types";
+import { useHaloAnimation } from "./useHaloAnimation";
 
 
 type SingleAnimatedHaloProps = {

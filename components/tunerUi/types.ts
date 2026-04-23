@@ -14,6 +14,7 @@ export interface TunerDisplay {
   octave: number
   label: string
   cents: number
+  tuneDistance: number
   frequency: number
   amplitude: number
   confidence: number

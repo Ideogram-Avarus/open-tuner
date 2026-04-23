@@ -7,7 +7,7 @@ import math
 
 OUT_DIR = Path('assets/images')
 BASE = 1024
-ICON_SCALE = 0.82  # overall icon size inside the square (1.0 = full bleed)
+ICON_SCALE = 0.75  # overall icon size inside the square (1.0 = full bleed)
 
 
 def make_gradient(size, top=(25, 160, 255), bottom=(0, 255, 200)):
@@ -220,6 +220,7 @@ def main():
         'react-logo@2x.png': (200, 200),
         'react-logo@3x.png': (300, 300),
         'partial-react-logo.png': (518, 316),
+        'google-app-listing.png': (512, 512),
     }
 
     art_small = Image.open(OUT_DIR / 'android-icon-foreground.png')

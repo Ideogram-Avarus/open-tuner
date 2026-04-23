@@ -2,8 +2,8 @@ import { colors } from '@/hooks/theme';
 import React from 'react';
 import Animated, { useAnimatedProps } from 'react-native-reanimated';
 import Svg, { Circle, G } from 'react-native-svg';
-import { useNeedle } from '../hooks/useNeedle';
-import { NeedleSVG } from './SVG/NeedleSVG';
+import { NeedleSVG } from './NeedleSVG';
+import { useNeedle } from './useNeedle';
 
 const AnimatedG = Animated.createAnimatedComponent(G);
 

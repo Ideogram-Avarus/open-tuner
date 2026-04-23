@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import { StyleSheet, View } from "react-native";
 import Svg from "react-native-svg";
 import { HaloState } from "../types";
-import { SingleAnimatedHalo } from "./SVG/SingleAnimatedHalo";
+import { SingleAnimatedHalo } from "./SingleAnimatedHalo";
 
 interface AnimatedHaloProps {
     color: string;

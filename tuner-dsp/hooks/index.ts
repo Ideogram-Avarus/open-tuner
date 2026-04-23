@@ -1,2 +1,3 @@
-export * from './useTuner'
+export { DEFAULT_CONFIG } from './configs';
+export * from './useTuner';
 
