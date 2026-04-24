@@ -21,6 +21,13 @@ target_include_directories(
     ../shared
 )
 
+# Compatibility for 16k devices
+target_link_options(
+    tuner
+    PRIVATE
+    "-Wl,-z,max-page-size=16384"
+)
+
 find_library(log-lib log)
 
 target_link_libraries(tuner log)

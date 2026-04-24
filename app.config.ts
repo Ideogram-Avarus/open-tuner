@@ -1,10 +1,23 @@
 
+const profile = process.env.EAS_BUILD_PROFILE ?? 'local';
+
+
+const get_package_name = () => {
+  if (profile === 'development') return 'com.ideogram.opentuner.dev';
+  else return 'com.ideogram.opentuner';
+}
+
+const getAppName = () => {
+  if (profile === 'development') return 'open-tuner (dev)';
+  return 'open-tuner';
+};
+
 
 const build_config = () => {
   return {
       "expo": {
-      "name": "open-tuner",
-      "slug": "open-tuner",
+      "name": getAppName(),
+      "slug": 'open-tuner',
       "version": "1.0.0",
       "orientation": "portrait",
       "icon": "./assets/images/icon.png",
@@ -12,12 +25,12 @@ const build_config = () => {
       "userInterfaceStyle": "automatic",
       "newArchEnabled": true,
       "ios": {
-        "supportsTablet": true
+        "supportsTablet": true,
+        "bundleIdentifier": get_package_name()
       },
       "android": {
-        "permissions": [
-          "RECORD_AUDIO"
-        ],
+        "permissions": ["RECORD_AUDIO"],
+        "package": get_package_name(),
         "adaptiveIcon": {
           "backgroundColor": "#0f2d45",
           "foregroundImage": "./assets/images/android-icon-foreground.png",
@@ -26,7 +39,6 @@ const build_config = () => {
         },
         "edgeToEdgeEnabled": true,
         "predictiveBackGestureEnabled": false,
-        "package": "com.ideogram.opentuner"
       },
       "web": {
         "output": "static",

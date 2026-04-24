@@ -29,7 +29,7 @@ RUN sdkmanager "platform-tools" "platforms;android-34" "build-tools;34.0.0"
 WORKDIR /app
 
 
-COPY package.json app.json eas.json eslint.config.js tsconfig.json metro.config.js ./
+COPY package.json app.config.ts eas.json eslint.config.js tsconfig.json metro.config.js ./
 COPY app assets components constants hooks ./
 COPY tuner-dsp ./tuner-dsp
 
