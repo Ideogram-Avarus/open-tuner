@@ -14,6 +14,7 @@ const getAppName = () => {
 
 
 const build_config = () => {
+  console.log("⚙️ Building app for environment: ", process.env.EAS_BUILD_PROFILE);
   return {
       "expo": {
       "name": getAppName(),
